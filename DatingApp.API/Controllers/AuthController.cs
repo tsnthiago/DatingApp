@@ -30,10 +30,10 @@ namespace DatingApp.API.Controllers
         public async Task<IActionResult> Register(UserForRegisterDTO userForRegisterDTO)
         {
             userForRegisterDTO.Username = userForRegisterDTO.Username.ToLower();
-            
+
             if (await _repo.UserExists(userForRegisterDTO.Username))
             {
-                return BadRequest("Username already exists");
+                return BadRequest("Username already exists.\n");
             }
 
             var userToCreate = new User
@@ -54,13 +54,13 @@ namespace DatingApp.API.Controllers
             if (userFromRepo == null)
             {
                 return Unauthorized();
-            }   
+            }
 
             var claims = new[]
             {
-                new Claim(ClaimTypes.NameIdentifier, userFromRepo.Id.ToString()),
-                new Claim(ClaimTypes.Name, userFromRepo.Username)
-            };
+                    new Claim(ClaimTypes.NameIdentifier, userFromRepo.Id.ToString()),
+                    new Claim(ClaimTypes.Name, userFromRepo.Username)
+                };
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config.GetSection("AppSettings:Token").Value));
 
@@ -77,7 +77,8 @@ namespace DatingApp.API.Controllers
 
             var token = tokenHandler.CreateToken(tokenDescriptor);
 
-            return Ok(new {
+            return Ok(new
+            {
                 token = tokenHandler.WriteToken(token)
             });
         }
