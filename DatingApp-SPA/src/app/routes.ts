@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+
 import { HomeComponent } from './home/home.component';
 import { MemberListComponent } from './member-list/member-list.component';
 import { MessagesComponent } from './messages/messages.component';
@@ -15,6 +16,7 @@ export const appRoutes: Routes = [
             { path: 'members', component: MemberListComponent },
             { path: 'messages', component: MessagesComponent },
             { path: 'lists', component: ListsComponent }
+            // For each component, one more line should be added here.
         ]
     },
     { path: '**', redirectTo: '', pathMatch: 'full' }
