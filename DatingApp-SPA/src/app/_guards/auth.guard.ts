@@ -12,7 +12,7 @@ export class AuthGuard implements CanActivate {
     private alertifyService: AlertifyService) {}
 
   canActivate(): boolean {
-    if(this.authService.loggedIn()) {
+    if (this.authService.loggedIn()) {
       return true;
     }
     this.alertifyService.error('You shall not pass!');
